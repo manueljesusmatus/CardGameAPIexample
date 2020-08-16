@@ -1,4 +1,4 @@
-package com.mmatus.example.example;
+package com.mmatus.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
