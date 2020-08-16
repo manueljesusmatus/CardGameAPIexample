@@ -1,4 +1,4 @@
-package com.mmatus.example.example;
+package com.mmatus.example;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
