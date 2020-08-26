@@ -1,8 +1,7 @@
 package com.mmatus.example.Controller;
 
-
 import java.util.Date;
-
+import java.util.List;
 
 import com.mmatus.example.Entities.Card;
 import com.mmatus.example.ErrorHandler.ErrorHandlerMessage;
@@ -10,6 +9,7 @@ import com.mmatus.example.Services.CardServ;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +26,6 @@ public class APIcontroller {
 	@Qualifier("CardService")
 	private CardServ cardServ;
     
-    
-    
     @GetMapping("/Card")
 	public ResponseEntity<Object> getCardById( 
 			@RequestParam(required = true) long id
@@ -39,5 +37,44 @@ public class APIcontroller {
 			return new ResponseEntity<Object>(error,HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Object>(card, HttpStatus.OK);
+	}
+
+	@GetMapping("/Cards")
+	public ResponseEntity<Object> getAllCardsByPage( 
+			@RequestParam(value = "page",required = true) Integer page,
+			@RequestParam(value = "size",required = false, defaultValue = "10") Integer size
+			){
+		if(size > 20){
+			size = 20;
+		}else if(size < 10){
+			size = 10;
+		}
+		List<Card> listCard = cardServ.readAllCardsByPage(page,size);
+			
+		if(listCard.isEmpty()) {
+			String errormessage = "Page : " + Long.toString(page) + " not found";
+			ErrorHandlerMessage error = new ErrorHandlerMessage( new Date(), errormessage);
+			return new ResponseEntity<Object>(error,HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Object>(listCard, HttpStatus.OK);
+	}
+
+	@GetMapping("/CardsPage")
+	public ResponseEntity<Object> getAllCardsByPagev2( 
+			@RequestParam(value = "page",required = true) Integer page,
+			@RequestParam(value = "size",required = false, defaultValue = "10") Integer size
+			){
+		if(size > 20){
+			size = 20;
+		}else if(size < 10){
+			size = 10;
+		}
+		Page<Card> listCard = cardServ.readAllCardsByPagev2(page, size);
+		if(listCard.isEmpty()) {
+			String errormessage = "Page : " + Long.toString(page) + " not found";
+			ErrorHandlerMessage error = new ErrorHandlerMessage( new Date(), errormessage);
+			return new ResponseEntity<Object>(error,HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Object>(listCard, HttpStatus.OK);
 	}
 }

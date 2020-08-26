@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 @Table(name="Cards")
 public class Card{
@@ -21,15 +23,19 @@ public class Card{
     @Column(name="race")
     private String race;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name="atk")
     private Integer atk;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name="def")
     private Integer def;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name="level")
     private Integer level;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name="attrribute")
     private String attribute;
     
@@ -41,7 +47,8 @@ public class Card{
     }
 
 
-    public Card(Long id, String name, String desc, String race, Integer atk, Integer def, Integer level, String attribute, String type) {
+    public Card(final Long id, final String name, final String desc, final String race, final Integer atk,
+            final Integer def, final Integer level, final String attribute, final String type) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -52,14 +59,12 @@ public class Card{
         this.attribute = attribute;
         this.type = type;
     }
-    
-
 
     public long getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         this.id = id;
     }
 
@@ -67,7 +72,7 @@ public class Card{
         return this.name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -75,7 +80,7 @@ public class Card{
         return this.desc;
     }
 
-    public void setDesc(String desc) {
+    public void setDesc(final String desc) {
         this.desc = desc;
     }
 
@@ -83,7 +88,7 @@ public class Card{
         return this.race;
     }
 
-    public void setRace(String race) {
+    public void setRace(final String race) {
         this.race = race;
     }
 
@@ -91,7 +96,7 @@ public class Card{
         return this.atk;
     }
 
-    public void setAtk(Integer atk) {
+    public void setAtk(final Integer atk) {
         this.atk = atk;
     }
 
@@ -99,7 +104,7 @@ public class Card{
         return this.def;
     }
 
-    public void setDef(Integer def) {
+    public void setDef(final Integer def) {
         this.def = def;
     }
 
@@ -107,7 +112,7 @@ public class Card{
         return this.level;
     }
 
-    public void setLevel(Integer level) {
+    public void setLevel(final Integer level) {
         this.level = level;
     }
 
@@ -115,7 +120,7 @@ public class Card{
         return this.attribute;
     }
 
-    public void setAttrribute(String attribute) {
+    public void setAttrribute(final String attribute) {
         this.attribute = attribute;
     }
 
@@ -123,7 +128,7 @@ public class Card{
         return this.type;
     }
 
-    public void setType(String type) {
+    public void setType(final String type) {
         this.type = type;
     }
 
