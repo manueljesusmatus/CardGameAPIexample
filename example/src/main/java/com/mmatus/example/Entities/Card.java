@@ -6,9 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Monsters")
-public class Monster {
-    
+@Table(name="Cards")
+public class Card{
     @Id
 	@Column(name="ID")
 	private long id;
@@ -16,8 +15,8 @@ public class Monster {
 	@Column(name="name")
 	private String name;
 	
-	@Column(name="description")
-    private String description;
+	@Column(name="description",length = 1200)
+    private String desc;
 
     @Column(name="race")
     private String race;
@@ -32,25 +31,25 @@ public class Monster {
     private Integer level;
 
     @Column(name="attrribute")
-    private String attrribute;
+    private String attribute;
     
     @Column(name="type")
     private String type;
 
 
-    public Monster() {
+    public Card(){
     }
 
 
-    public Monster(long id, String name, String description, String race, Integer atk, Integer def, Integer level, String attrribute, String type) {
+    public Card(Long id, String name, String desc, String race, Integer atk, Integer def, Integer level, String attribute, String type) {
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.desc = desc;
         this.race = race;
         this.atk = atk;
         this.def = def;
         this.level = level;
-        this.attrribute = attrribute;
+        this.attribute = attribute;
         this.type = type;
     }
     
@@ -72,12 +71,12 @@ public class Monster {
         this.name = name;
     }
 
-    public String getDescription() {
-        return this.description;
+    public String getDesc() {
+        return this.desc;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getRace() {
@@ -112,12 +111,12 @@ public class Monster {
         this.level = level;
     }
 
-    public String getAttrribute() {
-        return this.attrribute;
+    public String getAttribute() {
+        return this.attribute;
     }
 
-    public void setAttrribute(String attrribute) {
-        this.attrribute = attrribute;
+    public void setAttrribute(String attribute) {
+        this.attribute = attribute;
     }
 
     public String getType() {
