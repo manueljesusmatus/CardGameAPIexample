@@ -25,6 +25,9 @@ public class APIcontroller {
     @Autowired
 	@Qualifier("CardService")
 	private CardServ cardServ;
+
+	String NOT_FOUND_MESSAGE = "Not Found";
+	String PAGE_MESSAGE = "Page : ";
     
     @GetMapping("/Card")
 	public ResponseEntity<Object> getCardById( 
@@ -32,7 +35,7 @@ public class APIcontroller {
 			){
 		Card card = cardServ.readById(id);
 		if(card == null) {
-			String errormessage = "ID : " + Long.toString(id) + " not found";
+			String errormessage = "ID : " + Long.toString(id) + NOT_FOUND_MESSAGE;
 			ErrorHandlerMessage error = new ErrorHandlerMessage( new Date(), errormessage);
 			return new ResponseEntity<Object>(error,HttpStatus.NOT_FOUND);
 		}
@@ -50,9 +53,8 @@ public class APIcontroller {
 			size = 10;
 		}
 		List<Card> listCard = cardServ.readAllCardsByPage(page,size);
-			
-		if(listCard.isEmpty()) {
-			String errormessage = "Page : " + Long.toString(page) + " not found";
+		if(listCard.isEmpty()){
+			String errormessage = PAGE_MESSAGE + Long.toString(page) + NOT_FOUND_MESSAGE;
 			ErrorHandlerMessage error = new ErrorHandlerMessage( new Date(), errormessage);
 			return new ResponseEntity<Object>(error,HttpStatus.NOT_FOUND);
 		}
@@ -71,7 +73,22 @@ public class APIcontroller {
 		}
 		Page<Card> listCard = cardServ.readAllCardsByPagev2(page, size);
 		if(listCard.isEmpty()) {
-			String errormessage = "Page : " + Long.toString(page) + " not found";
+			String errormessage = PAGE_MESSAGE + Long.toString(page) + NOT_FOUND_MESSAGE;
+			ErrorHandlerMessage error = new ErrorHandlerMessage( new Date(), errormessage);
+			return new ResponseEntity<Object>(error,HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Object>(listCard, HttpStatus.OK);
+	}
+
+	@GetMapping("/filterCard")
+	public ResponseEntity<Object> getCardsFilters( 
+			@RequestParam(value = "page",required = true) Integer atk,
+			@RequestParam(value = "size",required = true) Integer def,
+			@RequestParam(value = "size",required = true) Integer level
+			){
+		List<Card> listCard = cardServ.readByFilters(atk, def,level);
+		if(listCard.isEmpty()) {
+			String errormessage = PAGE_MESSAGE + NOT_FOUND_MESSAGE;
 			ErrorHandlerMessage error = new ErrorHandlerMessage( new Date(), errormessage);
 			return new ResponseEntity<Object>(error,HttpStatus.NOT_FOUND);
 		}

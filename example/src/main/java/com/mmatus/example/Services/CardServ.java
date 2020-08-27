@@ -13,33 +13,37 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service("CardService")
-public class CardServ{
-    
-    @Autowired
-	@Qualifier("CardRepository")
-    private CardRepo cardRepo;
+public class CardServ {
 
-    public boolean createCard( Card instancia) {
+	@Autowired
+	@Qualifier("CardRepository")
+	private CardRepo cardRepo;
+
+	public boolean createCard(Card instancia) {
 		try {
-			cardRepo.save( instancia );
+			cardRepo.save(instancia);
 			return true;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			return false;
 		}
 	}
-	
-	public Card readById(long id){
+
+	public Card readById(long id) {
 		return cardRepo.findById(id);
 	}
 
-	public List<Card> readAllCardsByPage(int page, int size){
+	public List<Card> readAllCardsByPage(int page, int size) {
 		Pageable pageable = PageRequest.of(page, size);
 		Page<Card> result = cardRepo.findAll(pageable);
 		return result.getContent();
 	}
 
-	public Page<Card> readAllCardsByPagev2(int page, int size){
+	public Page<Card> readAllCardsByPagev2(int page, int size) {
 		Pageable pageable = PageRequest.of(page, size);
 		return cardRepo.findAll(pageable);
+	}
+
+	public List<Card> readByFilters(int atk, int def, int level) {
+		return cardRepo.findAll();
 	}
 }

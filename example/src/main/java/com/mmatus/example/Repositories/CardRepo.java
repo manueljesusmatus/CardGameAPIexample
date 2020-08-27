@@ -17,6 +17,8 @@ public interface CardRepo extends JpaRepository<Card,Long> {
 
     public abstract Page<Card> findAll(Pageable pageable);
 
+    public abstract Page<Card> findByAtkLessThanEqualAndDefLessThanEqual(int atk, int def, Pageable pageable);
+
     public abstract List<Card> findAll();
     
 }
