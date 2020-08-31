@@ -2,26 +2,34 @@ package com.mmatus.example.Entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 @Table(name="Banlists")
 public class Banlist {
     
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID")
     private long id;
     
     @Column(name="id_card")
 	private long id_card;
-	
+    
+    @JsonInclude(JsonInclude.Include.NON_NULL)
 	@Column(name="ban_goat")
 	private String ban_goat;
-	
+    
+    @JsonInclude(JsonInclude.Include.NON_NULL)
 	@Column(name="ban_ocg")
     private String ban_ocg;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name="ban_tcg")
     private String ban_tcg;
 

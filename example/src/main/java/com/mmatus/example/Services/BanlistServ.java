@@ -1,5 +1,7 @@
 package com.mmatus.example.Services;
 
+import java.util.List;
+
 import com.mmatus.example.Entities.Banlist;
 import com.mmatus.example.Repositories.BanlistRepo;
 
@@ -21,5 +23,13 @@ public class BanlistServ {
 		}catch(Exception e) {
 			return false;
 		}
-    }
+	}
+	
+	public List<Banlist> readBanListInfo(){
+		return banListRepo.findAll();
+	}
+
+	public Banlist readBanlistByIdCard(Long id){
+		return banListRepo.findByIdCard(id);
+	}
 }
