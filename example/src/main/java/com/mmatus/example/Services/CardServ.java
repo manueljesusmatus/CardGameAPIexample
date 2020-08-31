@@ -32,18 +32,12 @@ public class CardServ {
 		return cardRepo.findById(id);
 	}
 
-	public List<Card> readAllCardsByPage(int page, int size) {
-		Pageable pageable = PageRequest.of(page, size);
-		Page<Card> result = cardRepo.findAll(pageable);
-		return result.getContent();
+	public List<Card> readAllCards(Integer atk, Integer def, Integer level, String type, String race) {
+		return cardRepo.findWithFilters(atk,def,level,type,race);
 	}
 
-	public Page<Card> readAllCardsByPagev2(int page, int size) {
+	public Page<Card> readAllCardsV2(Integer atk, Integer def, Integer level, Integer page, Integer size, String type, String race) {
 		Pageable pageable = PageRequest.of(page, size);
-		return cardRepo.findAll(pageable);
-	}
-
-	public List<Card> readByFilters(int atk, int def, int level) {
-		return cardRepo.findAll();
+		return cardRepo.findWithFilters(atk,def,level,type,race,pageable);
 	}
 }

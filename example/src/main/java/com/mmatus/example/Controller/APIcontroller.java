@@ -42,28 +42,27 @@ public class APIcontroller {
 		return new ResponseEntity<Object>(card, HttpStatus.OK);
 	}
 
+
 	@GetMapping("/Cards")
-	public ResponseEntity<Object> getAllCardsByPage( 
-			@RequestParam(value = "page",required = true) Integer page,
-			@RequestParam(value = "size",required = false, defaultValue = "10") Integer size
+	public ResponseEntity<Object> getCardsFilters( 
+			@RequestParam(value = "atk",required = false) Integer atk,
+			@RequestParam(value = "def",required = false) Integer def,
+			@RequestParam(value = "level",required = false) Integer level,
+			@RequestParam(value = "type",required = false) String type,
+			@RequestParam(value = "race",required = false) String race
 			){
-		if(size > 20){
-			size = 20;
-		}else if(size < 10){
-			size = 10;
-		}
-		List<Card> listCard = cardServ.readAllCardsByPage(page,size);
-		if(listCard.isEmpty()){
-			String errormessage = PAGE_MESSAGE + Long.toString(page) + NOT_FOUND_MESSAGE;
-			ErrorHandlerMessage error = new ErrorHandlerMessage( new Date(), errormessage);
-			return new ResponseEntity<Object>(error,HttpStatus.NOT_FOUND);
-		}
+		List<Card> listCard = cardServ.readAllCards(atk, def, level, type, race);
 		return new ResponseEntity<Object>(listCard, HttpStatus.OK);
 	}
 
 	@GetMapping("/CardsPage")
-	public ResponseEntity<Object> getAllCardsByPagev2( 
-			@RequestParam(value = "page",required = true) Integer page,
+	public ResponseEntity<Object> getCardsFiltersv2( 
+			@RequestParam(value = "atk",required = false) Integer atk,
+			@RequestParam(value = "def",required = false) Integer def,
+			@RequestParam(value = "level",required = false) Integer level,
+			@RequestParam(value = "type",required = false) String type,
+			@RequestParam(value = "race",required = false) String race,
+			@RequestParam(value = "page",required = false, defaultValue = "0") Integer page,
 			@RequestParam(value = "size",required = false, defaultValue = "10") Integer size
 			){
 		if(size > 20){
@@ -71,27 +70,7 @@ public class APIcontroller {
 		}else if(size < 10){
 			size = 10;
 		}
-		Page<Card> listCard = cardServ.readAllCardsByPagev2(page, size);
-		if(listCard.isEmpty()) {
-			String errormessage = PAGE_MESSAGE + Long.toString(page) + NOT_FOUND_MESSAGE;
-			ErrorHandlerMessage error = new ErrorHandlerMessage( new Date(), errormessage);
-			return new ResponseEntity<Object>(error,HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<Object>(listCard, HttpStatus.OK);
-	}
-
-	@GetMapping("/filterCard")
-	public ResponseEntity<Object> getCardsFilters( 
-			@RequestParam(value = "page",required = true) Integer atk,
-			@RequestParam(value = "size",required = true) Integer def,
-			@RequestParam(value = "size",required = true) Integer level
-			){
-		List<Card> listCard = cardServ.readByFilters(atk, def,level);
-		if(listCard.isEmpty()) {
-			String errormessage = PAGE_MESSAGE + NOT_FOUND_MESSAGE;
-			ErrorHandlerMessage error = new ErrorHandlerMessage( new Date(), errormessage);
-			return new ResponseEntity<Object>(error,HttpStatus.NOT_FOUND);
-		}
+		Page<Card> listCard = cardServ.readAllCardsV2(atk, def, level, page, size, type, race);
 		return new ResponseEntity<Object>(listCard, HttpStatus.OK);
 	}
 }
