@@ -29,10 +29,10 @@ public class APIpricesController {
         List<Price> listCard;
         if(id != null){
             Price instancia = priceServ.readPriceByIdCard(id);
-            return new ResponseEntity<Object>(instancia, HttpStatus.OK);
+            return new ResponseEntity<Object>(priceServ.convertToDTO(instancia), HttpStatus.OK);
         }else{
             listCard = priceServ.readPriceInfo();
-            return new ResponseEntity<Object>(listCard, HttpStatus.OK);
+            return new ResponseEntity<Object>(priceServ.convertToDTO(listCard), HttpStatus.OK);
         }
     }
 
