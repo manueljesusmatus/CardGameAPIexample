@@ -29,10 +29,10 @@ public class APIbanlistController {
         List<Banlist> listCard;
         if(id != null){
             Banlist instancia = banlistServ.readBanlistByIdCard(id);
-            return new ResponseEntity<Object>(instancia, HttpStatus.OK);
+            return new ResponseEntity<Object>(banlistServ.convertToDTO(instancia), HttpStatus.OK);
         }else{
             listCard = banlistServ.readBanListInfo();
-            return new ResponseEntity<Object>(listCard, HttpStatus.OK);
+            return new ResponseEntity<Object>( banlistServ.convertToDTO(listCard) , HttpStatus.OK);
         }
     }
 }
