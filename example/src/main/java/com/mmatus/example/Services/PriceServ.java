@@ -1,5 +1,7 @@
 package com.mmatus.example.Services;
 
+import java.util.List;
+
 import com.mmatus.example.Entities.Price;
 import com.mmatus.example.Repositories.PriceRepo;
 
@@ -21,5 +23,13 @@ public class PriceServ {
 		}catch(Exception e) {
 			return false;
 		}
-    }
+	}
+	
+	public List<Price> readPriceInfo(){
+		return priceRepo.findAll();
+	}
+
+	public Price readPriceByIdCard(Long id){
+		return priceRepo.findByIdCard(id);
+	}
 }
