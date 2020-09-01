@@ -1,8 +1,12 @@
 package com.mmatus.example.Entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -42,13 +46,15 @@ public class Card{
     @Column(name="type")
     private String type;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    @JoinColumn(name = "banlist_id", referencedColumnName = "id_card", nullable=true)
+    private Banlist banlist_info;
 
     public Card(){
     }
 
-
-    public Card(final Long id, final String name, final String desc, final String race, final Integer atk,
-            final Integer def, final Integer level, final String attribute, final String type) {
+    public Card(long id, String name, String desc, String race, Integer atk, Integer def, Integer level, String attribute, String type, Banlist banlist_info) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -58,6 +64,7 @@ public class Card{
         this.level = level;
         this.attribute = attribute;
         this.type = type;
+        this.banlist_info = banlist_info;
     }
 
     public long getId() {
@@ -130,6 +137,14 @@ public class Card{
 
     public void setType(final String type) {
         this.type = type;
+    }
+
+    public Banlist getbanlist_info() {
+        return this.banlist_info;
+    }
+
+    public void setbanlist_info(Banlist banlist) {
+        this.banlist_info = banlist;
     }
 
 

@@ -1,13 +1,18 @@
 package com.mmatus.example.DTOentities;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class DTObanlist {
 
     private long id_card;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String ban_goat;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String ban_ocg;
-    
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String ban_tcg;
 
     public DTObanlist(){

@@ -1,5 +1,7 @@
 package com.mmatus.example.Entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,15 +13,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 @Table(name="Banlists")
-public class Banlist {
+public class Banlist implements Serializable{
     
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID")
-    private long id;
+    private Long id;
     
     @Column(name="id_card")
-	private long id_card;
+	private Long id_card;
     
     @JsonInclude(JsonInclude.Include.NON_NULL)
 	@Column(name="ban_goat")
@@ -33,9 +37,8 @@ public class Banlist {
     @Column(name="ban_tcg")
     private String ban_tcg;
 
-
     public Banlist(){
-        
+
     }
 
     public Banlist(long id, long id_card, String ban_goat, String ban_ocg, String ban_tcg) {
@@ -87,5 +90,6 @@ public class Banlist {
     public void setBan_tcg(String ban_tcg) {
         this.ban_tcg = ban_tcg;
     }
+
 
 }
