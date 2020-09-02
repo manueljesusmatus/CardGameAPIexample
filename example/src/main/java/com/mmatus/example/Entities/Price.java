@@ -1,5 +1,7 @@
 package com.mmatus.example.Entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 @Table(name="Prices")
-public class Price {
+public class Price implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

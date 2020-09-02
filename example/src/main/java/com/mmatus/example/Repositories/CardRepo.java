@@ -19,7 +19,15 @@ public interface CardRepo extends JpaRepository<Card,Long> {
 
     public abstract List<Card> findAll();
 
-    @Query(value = "SELECT c FROM Card c LEFT JOIN Banlist b ON b.id_card = c.id WHERE (:atk is null or c.atk = :atk) and (:def is null or c.def = :def) and (:level is null or c.level = :level) and (:type is null or c.type = :type) and (:race is null or c.race = :race)",
+    @Query(value = "SELECT c FROM Card c "+
+                    "LEFT JOIN Banlist b ON b.id_card = c.id "+
+                    "LEFT JOIN Price p ON p.id_card = c.id "+
+                    "LEFT JOIN Image i ON i.id_card = c.id "+
+                    "WHERE (:atk is null or c.atk = :atk) and "+
+                    "(:def is null or c.def = :def) and "+
+                    "(:level is null or c.level = :level) and "+
+                    "(:type is null or c.type = :type) and "+
+                    "(:race is null or c.race = :race)",
     countQuery = "SELECT count(*) FROM Card")
     public abstract Page<Card> findWithFilters(Integer atk, Integer def, Integer level, String type, String race, Pageable pageable);
 

@@ -51,10 +51,21 @@ public class Card{
     @JoinColumn(name = "banlist_id", referencedColumnName = "id_card", nullable=true)
     private Banlist banlist_info;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    @JoinColumn(name = "price_id", referencedColumnName = "id_card", nullable=true)
+    private Price card_prices;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    @JoinColumn(name = "image_id", referencedColumnName = "id_card", nullable=true)
+    private Image card_images;
+
     public Card(){
     }
 
-    public Card(long id, String name, String desc, String race, Integer atk, Integer def, Integer level, String attribute, String type, Banlist banlist_info) {
+
+    public Card(long id, String name, String desc, String race, Integer atk, Integer def, Integer level, String attribute, String type, Banlist banlist_info, Price card_prices, Image card_images) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -65,13 +76,15 @@ public class Card{
         this.attribute = attribute;
         this.type = type;
         this.banlist_info = banlist_info;
+        this.card_prices = card_prices;
+        this.card_images = card_images;
     }
 
     public long getId() {
         return this.id;
     }
 
-    public void setId(final long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -79,7 +92,7 @@ public class Card{
         return this.name;
     }
 
-    public void setName(final String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -87,7 +100,7 @@ public class Card{
         return this.desc;
     }
 
-    public void setDesc(final String desc) {
+    public void setDesc(String desc) {
         this.desc = desc;
     }
 
@@ -95,7 +108,7 @@ public class Card{
         return this.race;
     }
 
-    public void setRace(final String race) {
+    public void setRace(String race) {
         this.race = race;
     }
 
@@ -103,7 +116,7 @@ public class Card{
         return this.atk;
     }
 
-    public void setAtk(final Integer atk) {
+    public void setAtk(Integer atk) {
         this.atk = atk;
     }
 
@@ -111,7 +124,7 @@ public class Card{
         return this.def;
     }
 
-    public void setDef(final Integer def) {
+    public void setDef(Integer def) {
         this.def = def;
     }
 
@@ -119,7 +132,7 @@ public class Card{
         return this.level;
     }
 
-    public void setLevel(final Integer level) {
+    public void setLevel(Integer level) {
         this.level = level;
     }
 
@@ -127,7 +140,7 @@ public class Card{
         return this.attribute;
     }
 
-    public void setAttrribute(final String attribute) {
+    public void setAttribute(String attribute) {
         this.attribute = attribute;
     }
 
@@ -135,16 +148,32 @@ public class Card{
         return this.type;
     }
 
-    public void setType(final String type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public Banlist getbanlist_info() {
+    public Banlist getBanlist_info() {
         return this.banlist_info;
     }
 
-    public void setbanlist_info(Banlist banlist) {
-        this.banlist_info = banlist;
+    public void setBanlist_info(Banlist banlist_info) {
+        this.banlist_info = banlist_info;
+    }
+
+    public Price getCard_prices() {
+        return this.card_prices;
+    }
+
+    public void setCard_prices(Price card_prices) {
+        this.card_prices = card_prices;
+    }
+
+    public Image getCard_images() {
+        return this.card_images;
+    }
+
+    public void setCard_images(Image card_images) {
+        this.card_images = card_images;
     }
 
 
