@@ -1,17 +1,24 @@
 package com.mmatus.example.DTOentities;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class DTOprice {
 
     private Long id_card;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private double amazon_price;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private double cardmarket_price;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private double coolstuffinc_price;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private double ebay_price;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private double tcgplayer_price;
 
     public DTOprice(){

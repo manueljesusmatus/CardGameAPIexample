@@ -52,7 +52,7 @@ public class APIcontroller {
 			@RequestParam(value = "race",required = false) String race
 			){
 		List<Card> listCard = cardServ.readAllCards(atk, def, level, type, race);
-		return new ResponseEntity<Object>(listCard, HttpStatus.OK);
+		return new ResponseEntity<Object>(cardServ.convertToDTO(listCard), HttpStatus.OK);
 	}
 
 	@GetMapping("/CardsPage")
@@ -71,6 +71,6 @@ public class APIcontroller {
 			size = 10;
 		}
 		Page<Card> listCard = cardServ.readAllCardsV2(atk, def, level, page, size, type, race);
-		return new ResponseEntity<Object>(listCard, HttpStatus.OK);
+		return new ResponseEntity<Object>(cardServ.convertToDTO(listCard), HttpStatus.OK);
 	}
 }
