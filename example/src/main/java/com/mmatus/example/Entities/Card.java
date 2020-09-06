@@ -1,11 +1,16 @@
 package com.mmatus.example.Entities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -13,7 +18,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 @Table(name="Cards")
-public class Card{
+public class Card implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
     @Id
 	@Column(name="ID")
 	private long id;
@@ -57,15 +65,15 @@ public class Card{
     private Price card_prices;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-    @JoinColumn(name = "image_id", referencedColumnName = "id_card", nullable=true)
-    private Image card_images;
+    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    @JoinColumn(name = "image_id")
+    private List<Image> card_images = new ArrayList<>();
 
     public Card(){
     }
 
 
-    public Card(long id, String name, String desc, String race, Integer atk, Integer def, Integer level, String attribute, String type, Banlist banlist_info, Price card_prices, Image card_images) {
+    public Card(long id, String name, String desc, String race, Integer atk, Integer def, Integer level, String attribute, String type, Banlist banlist_info, Price card_prices, List<Image> card_images) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -79,6 +87,7 @@ public class Card{
         this.card_prices = card_prices;
         this.card_images = card_images;
     }
+
 
     public long getId() {
         return this.id;
@@ -168,13 +177,14 @@ public class Card{
         this.card_prices = card_prices;
     }
 
-    public Image getCard_images() {
+    public List<Image> getCard_images() {
         return this.card_images;
     }
 
-    public void setCard_images(Image card_images) {
+    public void setCard_images(List<Image> card_images) {
         this.card_images = card_images;
     }
+    
 
 
 }

@@ -1,5 +1,7 @@
 package com.mmatus.example.DTOentities;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class DTOcard {
@@ -33,13 +35,13 @@ public class DTOcard {
     private DTOprice card_prices;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private DTOimage card_images;
+    private List<DTOimage> card_images;
 
 
     public DTOcard() {
     }
 
-    public DTOcard(long id, String name, String desc, String race, Integer atk, Integer def, Integer level, String attribute, String type, DTObanlist banlist_info, DTOprice card_prices, DTOimage card_images) {
+    public DTOcard(long id, String name, String desc, String race, Integer atk, Integer def, Integer level, String attribute, String type, DTObanlist banlist_info, DTOprice card_prices, List<DTOimage> card_images) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -143,11 +145,11 @@ public class DTOcard {
         this.card_prices = card_prices;
     }
 
-    public DTOimage getCard_images() {
+    public List<DTOimage> getCard_images() {
         return this.card_images;
     }
 
-    public void setCard_images(DTOimage card_images) {
+    public void setCard_images(List<DTOimage>    card_images) {
         this.card_images = card_images;
     }
     

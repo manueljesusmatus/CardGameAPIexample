@@ -2,7 +2,7 @@ package com.mmatus.example.DTOentities;
 
 public class DTOimage {
     
-    private long id_card;
+    private long id;
     
     private String image_url;
 
@@ -13,18 +13,18 @@ public class DTOimage {
     }
 
 
-    public DTOimage(long id_card, String image_url, String image_url_small) {
-        this.id_card = id_card;
+    public DTOimage(long id, String image_url, String image_url_small) {
+        this.id = id;
         this.image_url = image_url;
         this.image_url_small = image_url_small;
     }
 
-    public long getId_card() {
-        return this.id_card;
+    public long getId() {
+        return this.id;
     }
 
-    public void setId_card(long id_card) {
-        this.id_card = id_card;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getImage_url() {

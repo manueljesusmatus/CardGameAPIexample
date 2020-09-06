@@ -26,7 +26,6 @@ public class Image implements Serializable{
     @Column(name="image_url_small")
     private String image_url_small;
 
-
     public Image() {
     }
 
