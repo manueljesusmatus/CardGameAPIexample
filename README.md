@@ -61,18 +61,10 @@
     "level": 3,
     "attribute": "WATER",
     "type": "Effect Monster",
-    "card_prices": {
-        "amazon_price": 15.99,
-        "cardmarket_price": 3.73,
-        "coolstuffinc_price": 0.0,
-        "ebay_price": 5.98,
-        "tcgplayer_price": 7.2
-    },
     "card_images": [
         {
             "id": 23899727,
-            "image_url": "https://storage.googleapis.com/ygoprodeck.com/pics/23899727.jpg",
-            "image_url_small": "https://storage.googleapis.com/ygoprodeck.com/pics_small/23899727.jpg"
+            "image_url": ".../image/23899727.jpg",
         }
     ]
 }
